@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Trends Store</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+    <div class="nav-left">
+        <img src="logo.png" class="logo">
+        <span class="brand-name">Trend Deals</span>
+    </div>
+
+    <div class="nav-right">
+       
+        <a href="login.html" class="nav-btn admin-btn">Admin Login</a>
+        <a href="#" class="nav-btn">Categories</a>
+        <a href="#" class="nav-btn">Blog</a>
+        <a href="#" class="nav-btn">News</a>
+        <a href="#" class="nav-btn">Compare</a>
+    </div>
+</nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>🔥 Hot Trending Deals</h1>
+        <p>Your daily picks of the hottest online products</p>
+
+        <div class="shop-banner">
+            <a href="products.html">🔥 SHOP NOW • EXPLORE THE HOTTEST DEALS →</a>
+        </div>
+    </section>
+
+    <!-- TRENDING PRODUCTS -->
+    <section class="products-section">
+        <h2 class="section-title">Trending Products</h2>
+
+        <div class="products-container" id="trendingProducts"></div>
+    </section>
+
+
+<script>
+function loadTrendingProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+
+    let container = document.getElementById("trendingProducts");
+    container.innerHTML = "";
+
+    if (products.length === 0) {
+        container.innerHTML = "<p style='text-align:center;color:#555;'>No products yet.</p>";
+        return;
+    }
+
+    products.forEach(p => {
+        // Correct external URL loading
+        let img = p.image || p.img || "https://via.placeholder.com/300x200?text=No+Image";
+
+        console.log("Loaded product image:", img); // DEBUG — check in browser console
+
+        let card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <img src="${img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p class="price">₹${p.price}</p>
+            <a href="${p.link}" class="buy-btn" target="_blank">Buy Now</a>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+loadTrendingProducts();
+</script>
+
+</body>
+</html>
