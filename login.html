@@ -19,20 +19,22 @@
 </div>
 
 <script>
+// inside login.html
 document.getElementById("loginForm").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    let u = document.getElementById("username").value;
-    let p = document.getElementById("password").value;
-
-    if(u === "admin" && p === "354265"){
-        window.location.href = "admin.html";
-    } else {
-        document.getElementById("errorMsg").innerText = "Invalid Login!";
-    }
+  e.preventDefault();
+  let u = document.getElementById("username").value.trim();
+  let p = document.getElementById("password").value.trim();
+  if (u === "admin" && p === "354265") {
+      localStorage.setItem("admin_logged_in", "true");  // *** add this ***
+      window.location.href = "admin.html";
+  } else {
+      document.getElementById("errorMsg").innerText = "Invalid Login!";
+  }
 });
+
 </script>
 
 </body>
 </html>
+
 
