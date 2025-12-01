@@ -59,11 +59,17 @@ function loadTrendingProducts() {
         return;
     }
 
-    products.forEach(p => {
-        // Correct external URL loading
-        let img = p.image || p.img || "https://via.placeholder.com/300x200?text=No+Image";
+    // ---- RANDOMIZE PRODUCTS ----
+    let shuffled = products
+        .map(p => ({ p, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(obj => obj.p);
 
-        console.log("Loaded product image:", img); // DEBUG — check in browser console
+    // ---- PICK FIRST 6 RANDOM ----
+    let trending = shuffled.slice(0, 6);
+
+    trending.forEach(p => {
+        let img = p.image || p.img || "https://via.placeholder.com/350x250?text=No+Image";
 
         let card = document.createElement("div");
         card.className = "product-card";
@@ -82,6 +88,8 @@ function loadTrendingProducts() {
 loadTrendingProducts();
 </script>
 
+
 </body>
 </html>
+
 
