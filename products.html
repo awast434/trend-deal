@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products • Trend Deals</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="logo.png" class="logo">
+            <span class="brand-name">Trend Deals</span>
+        </div>
+
+        <div class="nav-right">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="login.html" class="nav-btn">Admin Login</a>
+        </div>
+    </nav>
+
+    <!-- PRODUCT PAGE HEADER -->
+    <section class="hero" style="padding:40px 20px; background:#ff6a00; color:white;">
+        <h1>🔥 All Products</h1>
+        <p>Explore everything added by Admin</p>
+    </section>
+
+    <!-- SEARCH + CATEGORY FILTERS -->
+    <section style="text-align:center; padding:20px;">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search products..." 
+            style="padding:10px; width:60%; max-width:400px; border-radius:8px; border:1px solid #888;"
+        >
+
+        <div style="margin-top:12px;">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="electronics">Electronics</button>
+            <button class="category-btn" data-category="fashion">Fashion</button>
+            <button class="category-btn" data-category="home">Home</button>
+            <button class="category-btn" data-category="other">Other</button>
+        </div>
+    </section>
+
+    <!-- PRODUCT LIST -->
+    <section class="products-section">
+        <div class="products-container" id="productContainer"></div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
