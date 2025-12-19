@@ -48,48 +48,56 @@
 
 
 <script>
-function loadTrendingProducts() {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
+document.addEventListener("DOMContentLoaded", function () {
 
-    let container = document.getElementById("trendingProducts");
-    container.innerHTML = "";
+    function loadTrendingProducts() {
+        let products = JSON.parse(localStorage.getItem("products")) || [];
 
-    if (products.length === 0) {
-        container.innerHTML = "<p style='text-align:center;color:#555;'>No products yet.</p>";
-        return;
+        let container = document.getElementById("trendingProducts");
+
+        if (!container) {
+            console.error("❌ trendingProducts container not found");
+            return;
+        }
+
+        container.innerHTML = "";
+
+        if (products.length === 0) {
+            container.innerHTML =
+                "<p style='text-align:center;color:#555;'>No products yet.</p>";
+            return;
+        }
+
+        // RANDOMIZE PRODUCTS
+        products.sort(() => 0.5 - Math.random());
+
+        // SHOW ONLY 6 TRENDING
+        products.slice(0, 6).forEach(p => {
+            let img = p.img || p.image || "https://via.placeholder.com/350x250?text=No+Image";
+
+            let card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+                <img src="${img}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <p class="price">₹${p.price}</p>
+                <a href="${p.link}" class="buy-btn" target="_blank">Buy Now</a>
+            `;
+
+            container.appendChild(card);
+        });
     }
 
-    // ---- RANDOMIZE PRODUCTS ----
-    let shuffled = products
-        .map(p => ({ p, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(obj => obj.p);
+    loadTrendingProducts();
 
-    // ---- PICK FIRST 6 RANDOM ----
-    let trending = shuffled.slice(0, 6);
-
-    trending.forEach(p => {
-        let img = p.image || p.img || "https://via.placeholder.com/350x250?text=No+Image";
-
-        let card = document.createElement("div");
-        card.className = "product-card";
-
-        card.innerHTML = `
-            <img src="${img}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p class="price">₹${p.price}</p>
-            <a href="${p.link}" class="buy-btn" target="_blank">Buy Now</a>
-        `;
-
-        container.appendChild(card);
-    });
-}
-
-loadTrendingProducts();
+});
 </script>
+
 
 
 </body>
 </html>
+
 
 
